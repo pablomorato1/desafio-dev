@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_211827) do
     t.bigint "customer_id", null: false
     t.bigint "provider_id", null: false
     t.integer "transaction_type", null: false
-    t.date "date_register", null: false
+    t.string "date_register", null: false
     t.float "value", null: false
     t.string "card_number", null: false
     t.string "hour_transaction", null: false
