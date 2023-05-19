@@ -1,0 +1,55 @@
+<table id="transactions">
+  <tr>
+    <th> ID </th>
+    <th> Data </th>
+    <th> Valor </th>
+    <th> CPF </th>
+    <th> Cartão </th>
+    <th> Hora </th>
+    <th> Dono da Loja </th>
+    <th> Nome da Loja </th>
+    <th> Descrição </th>
+    <th> Natureza </th>
+  </tr>
+    <% @transactions.each do |transaction| %>
+    <tr>
+      <td><%= transaction.id %></td>
+      <td><%= transaction.date_register %></td>
+      <td><%= transaction.value %></td>
+      <td><%= "#{transaction.customer.cpf.first(3)}.***.***-#{transaction.customer.cpf.last(2)}"%></td>
+      <td><%= transaction.card_number %></td>
+      <td><%= transaction.hour_transaction %></td>
+      <td><%= transaction.provider.name_owner %></td>
+      <td><%= transaction.provider.name_provider %></td>
+      <td><%= transaction.transaction_type %></td>
+      <td><%= transaction.nature %></td>
+    </tr>
+    <% end %>
+</table>
+
+<style>
+  #transactions {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 50px
+  }
+
+  #transactions td, #transactions th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  #transactions tr:nth-child(even){background-color: #f2f2f2;}
+
+  #transactions tr:hover {background-color: #ddd;}
+
+  #transactions th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+</style>
+
