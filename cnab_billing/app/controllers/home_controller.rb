@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
   def index
-    @transactions = Transaction.all.includes(:customer, :provider)
+    @providers = Provider.all.includes(transactions: :customer).with_transaction_values
   end
 end

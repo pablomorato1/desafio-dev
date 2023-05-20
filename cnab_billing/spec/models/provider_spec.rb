@@ -40,4 +40,21 @@ RSpec.describe Provider, type: :model do
       end
     end
   end
+
+  describe ".with_transaction_values" do
+    let!(:provider) { create(:provider) }
+    let!(:customer) { create(:customer) }
+    let!(:transaction1) { create(:transaction, provider: provider, customer: customer, value: 100, transaction_type: 'sale') }
+    let!(:transaction2) { create(:transaction, provider: provider, customer: customer,value: 50, transaction_type: 'ticket') }
+    let!(:transaction3) { create(:transaction, provider: provider, customer: customer,value: 200, transaction_type: 'credit') }
+
+    it "returns the correct total transaction value" do
+      providers = Provider.with_transaction_values
+      expect(providers.length).to eq(1)
+
+      provider_with_value = providers.first
+      expect(provider_with_value).to eq(provider)
+      expect(provider_with_value.total_transaction_value).to eq(250) # 100 + (-50) + 200
+    end
+  end
 end
